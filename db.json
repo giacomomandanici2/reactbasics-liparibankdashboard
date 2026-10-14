@@ -1,0 +1,38 @@
+{
+    "accounts": [
+        {
+            "id": "1",
+            "name": "Conto Personale",
+            "type": "PRIVATE",
+            "balance": 12450.30,
+            "iban": "IT60X0542811101000000123456"
+        },
+        {
+            "id": "2",
+            "name": "Conto Aziendale",
+            "type": "BUSINESS",
+            "balance": 87320.00,
+            "iban": "IT60X0542811101000000789012"
+        }
+    ],
+    "movements": [
+        {
+            "id": "m1",
+            "accountId": "1",
+            "date": "2026-04-28",
+            "description": "Bonifico SEPA",
+            "amount": -200.00,
+            "type": "DEBIT",
+            "category": "Trasferimenti"
+        },
+        {
+            "id": "m2",
+            "accountId": "1",
+            "date": "2026-04-27",
+            "description": "Stipendio aprile",
+            "amount": 1800.00,
+            "type": "CREDIT",
+            "category": "Reddito"
+        }
+    ]
+}
