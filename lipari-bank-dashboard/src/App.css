@@ -21,3 +21,71 @@ aside {
     flex: 1;
     padding: 1rem;
 }
+
+
+/* .notification-container {
+    position: relative;
+}
+
+.notification-bell {
+    position: relative;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    font-size: 1.4rem;
+}
+
+.badge {
+    position: absolute;
+    top: -6px;
+    right: -8px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 4px;
+    border-radius: 999px;
+    background: #e53935;
+    color: white;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notification-dropdown {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    z-index: 1000;
+    width: 280px;
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: white;
+    color: #222;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
+}
+
+.notification-dropdown ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.notification-dropdown li {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.notification-dropdown .unread {
+    font-weight: 600;
+}
+
+.notification-dropdown .read {
+    color: #777;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+} */
