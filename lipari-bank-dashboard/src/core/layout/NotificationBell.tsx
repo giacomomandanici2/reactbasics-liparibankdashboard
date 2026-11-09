@@ -17,6 +17,7 @@ export default function NotificationBell(props: { userId: string }) {
   const unreadCount = notifications.filter((n) => !n.read).length;
 
   useEffect(() => {
+    setIsLoading(false);
     const notifications = setTimeout(() => {
       setNotifications([
         { id: "1", text: "Nuova transazione sul tuo conto", read: false },

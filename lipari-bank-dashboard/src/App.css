@@ -22,6 +22,59 @@ aside {
     padding: 1rem;
 }
 
+.dashboard-page {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: left;
+}
+
+.dashboard-summary {
+    padding: 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background: #fafafa;
+}
+
+.dashboard-summary strong {
+    font-size: 24px;
+}
+
+.dashboard-error {
+    color: #e53935;
+}
+
+.accounts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+}
+
+.accounts-grid > div {
+    padding: 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.transaction-list ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.transaction-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.transaction-totals {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    font-weight: 600;
+}
+
 
 /* .notification-container {
     position: relative;

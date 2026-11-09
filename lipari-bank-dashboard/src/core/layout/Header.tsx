@@ -5,10 +5,9 @@ import NotificationBell from "./NotificationBell";
 
 function Header() {
   return (
-    <header>
+    <header style={{ backgroundColor: "AccentColor" }}>
       <h1>🏦 LipariBank Dashboard</h1>
       <div className="user-placeholder">👤</div>
-
       <NotificationBell userId="{userId}"></NotificationBell>
     </header>
   );

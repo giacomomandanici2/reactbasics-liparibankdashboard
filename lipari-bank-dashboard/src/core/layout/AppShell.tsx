@@ -1,5 +1,6 @@
 import Header from "./Header";
 import Sidebar from "./Sidebar";
+import DashboardPage from "../../features/dashboard/DashboardPage";
 
 function AppShell() {
   return (
@@ -7,7 +8,9 @@ function AppShell() {
       <Header />
       <div className="app-body">
         <Sidebar />
-        <main className="app-main"></main>
+        <main className="app-main">
+          <DashboardPage />
+        </main>
       </div>
     </div>
   );

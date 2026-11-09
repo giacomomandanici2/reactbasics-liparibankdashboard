@@ -1,9 +1,11 @@
 //Crea src/features/dashboard/components/MovementRow.tsx:Props: movement: Movement Mostra: data formattata con Intl.DateTimeFormat('it-IT'), descrizione, importo con segno e colore (verde positivo, rosso negativo), badge categoria
-interface Movement {
+export interface Movement {
+  type: "CREDIT" | "DEBIT";
   date: string;
   description: string;
   amount: number;
-  category: "FOOD" | "TRANSPORT" | "ENTERTAINMENT" | "OTHER";
+  category: string;
+  id: string;
 }
 
 export default function MovementRow(movement: Movement) {
