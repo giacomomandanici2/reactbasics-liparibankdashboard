@@ -113,3 +113,13 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+.theme-light {
+  background: #fff;
+  color: #111;
+}
+
+.theme-dark {
+  background: #111;
+  color: #eee;
+}

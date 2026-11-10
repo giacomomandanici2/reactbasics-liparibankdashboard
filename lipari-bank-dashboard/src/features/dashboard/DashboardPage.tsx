@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AccountCard from "./components/AccountCard";
 import TransactionList from "./components/TransactionList";
 import type { Movement } from "./components/MovementRow";
@@ -11,41 +11,32 @@ interface Account {
   iban: string;
 }
 
+const mockMovements: Movement[] = [
+  {
+    type: "CREDIT",
+    date: "",
+    description: "",
+    amount: 10,
+    category: "",
+    id: "",
+  },
+];
+
+const mockAccounts: Account[] = [
+  {
+    id: "",
+    name: "",
+    type: "PRIVATE",
+    balance: 50,
+    iban: "",
+  },
+];
+
 export default function DashboardPage() {
-  const [accounts, setAccounts] = useState<Account[]>([]);
-  const [movements, setMovements] = useState<Movement[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  // creo un mock di movements
-  useEffect(() => {
-    mockMovements();
-    setIsLoading(false);
-  });
-
-  const mockMovements = () => {
-    const mockData: Movement[] = [
-      {
-        type: "CREDIT",
-        date: "",
-        description: "",
-        amount: 10,
-        category: "",
-        id: "",
-      },
-    ];
-    setMovements(mockData);
-    setError(null);
-    setAccounts([
-      {
-        id: "",
-        name: "",
-        type: "PRIVATE",
-        balance: 50,
-        iban: "",
-      },
-    ]);
-  };
+  const [accounts] = useState<Account[]>(mockAccounts);
+  const [movements] = useState<Movement[]>(mockMovements);
+  const [isLoading] = useState(false);
+  const [error] = useState<string | null>(null);
 
   const totalBalance = accounts.reduce(
     (sum, account) => sum + account.balance,
