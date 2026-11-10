@@ -2,6 +2,8 @@ import { useState } from "react";
 import AccountCard from "./components/AccountCard";
 import TransactionList from "./components/TransactionList";
 import type { Movement } from "./components/MovementRow";
+import { useApi } from "../../hooks/useApi";
+import SkeletonLoader from "../../utils/SkeletonLoader";
 
 interface Account {
   id: string;
@@ -22,21 +24,33 @@ const mockMovements: Movement[] = [
   },
 ];
 
-const mockAccounts: Account[] = [
-  {
-    id: "",
-    name: "",
-    type: "PRIVATE",
-    balance: 50,
-    iban: "",
-  },
-];
-
 export default function DashboardPage() {
-  const [accounts] = useState<Account[]>(mockAccounts);
   const [movements] = useState<Movement[]>(mockMovements);
-  const [isLoading] = useState(false);
-  const [error] = useState<string | null>(null);
+
+  const {
+    data: accounts,
+    isLoading,
+    error,
+    refetch,
+  } = useApi<Account[]>("/api/accounts");
+  if (isLoading) {
+    return (
+      <div>
+        <SkeletonLoader></SkeletonLoader>
+      </div>
+    );
+  }
+  if (error) {
+    return (
+      <div>
+        <h1>Errore caricamento dati</h1>
+        <button onClick={refetch}> Riprova </button>
+      </div>
+    );
+  }
+  if (!accounts || accounts.length === 0) {
+    return <div>Nessun conto disponibile</div>;
+  }
 
   const totalBalance = accounts.reduce(
     (sum, account) => sum + account.balance,
@@ -46,10 +60,6 @@ export default function DashboardPage() {
   return (
     <section className="dashboard-page">
       <h2>Dashboard</h2>
-
-      {isLoading && <p>Caricamento dati...</p>}
-
-      {error && <p className="dashboard-error">Errore: {error}</p>}
 
       {!isLoading && !error && (
         <>
