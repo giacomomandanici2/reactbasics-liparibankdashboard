@@ -1,58 +1,59 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../store/auth/AuthContext";
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+
+interface LoginFormValues {
+  email: string;
+  password: string;
+}
 
 export default function LoginPage() {
   const auth = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const [username, setUsername] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
 
-  const handleLogin = async () => {
-    await auth.login(username, password);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid, isSubmitting },
+  } = useForm<LoginFormValues>({ mode: "onChange" });
+
+  const onSubmit = async (data: LoginFormValues) => {
+    await auth.login(data.email, data.password);
     const from = (location.state as any)?.from?.pathname || "/dashboard";
     navigate(from, { replace: true });
   };
 
-  function handleUsername(event: React.ChangeEvent<HTMLInputElement>) {
-    const username = event.target.value;
-    setUsername(username);
-  }
-
-  function handlePassword(event: React.ChangeEvent<HTMLInputElement>) {
-    const password = event.target.value;
-    setPassword(password);
-  }
-
   return (
-    <>
-      <h2>Login Page</h2>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div>
-        <form>
-          <div>
-            <label>Username / email</label>
-            <input
-              onChange={handleUsername}
-              name="username"
-              type="text"
-              value={username}
-            ></input>
-          </div>
-          <div>
-            <label>Password</label>
-            <input
-              onChange={handlePassword}
-              name="password"
-              type="password"
-              value={password}
-            ></input>
-          </div>
-        </form>
-        <button type="submit" onClick={handleLogin}>
-          Login
-        </button>
+        <label>Email</label>
+        <input
+          {...register("email", {
+            required: "Email obbligatoria",
+            pattern: { value: /^\S+@\S+\.\S+$/, message: "Email non valida" },
+          })}
+        />
+        {errors.email && <span className="error">{errors.email.message}</span>}
       </div>
-    </>
+
+      <div>
+        <label>Password</label>
+        <input
+          type="password"
+          {...register("password", {
+            required: "Password obbligatoria",
+            minLength: { value: 6, message: "Almeno 6 caratteri" },
+          })}
+        />
+        {errors.password && (
+          <span className="error">{errors.password.message}</span>
+        )}
+      </div>
+
+      <button type="submit" disabled={!isValid || isSubmitting}>
+        {isSubmitting ? "Accesso..." : "Login"}
+      </button>
+    </form>
   );
 }

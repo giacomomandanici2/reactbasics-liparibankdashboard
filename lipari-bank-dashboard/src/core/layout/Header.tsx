@@ -9,7 +9,7 @@ function Header() {
   const auth = useAuth();
   const theme = useTheme();
   return (
-    <header style={{ backgroundColor: "AccentColor" }}>
+    <header style={{ backgroundColor: "" }}>
       <h1>🏦 LipariBank Dashboard</h1>
       <p>{"-_>" + auth.isAuthenticated}</p>
       {auth.isAuthenticated && (

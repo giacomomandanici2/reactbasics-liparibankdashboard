@@ -2,6 +2,7 @@ import { useParams, useNavigate, Navigate } from "react-router-dom";
 import { useApi } from "../../../hooks/useApi";
 import SkeletonLoader from "../../../utils/SkeletonLoader";
 import type { Account } from "../DashboardPage";
+import { TransferForm } from "./TransferForm";
 
 export default function AccountDetailPage() {
   const { accountId } = useParams<{ accountId: string }>();
@@ -28,6 +29,11 @@ export default function AccountDetailPage() {
       <h1>{account.name}</h1>
       <p>IBAN: {account.iban}</p>
       <p>Saldo: € {account.balance}</p>
+
+      <section className="transfer-section">
+        <h2>Nuovo bonifico</h2>
+        <TransferForm />
+      </section>
     </div>
   );
 }
