@@ -25,35 +25,63 @@ export default function LoginPage() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div>
-        <label>Email</label>
-        <input
-          {...register("email", {
-            required: "Email obbligatoria",
-            pattern: { value: /^\S+@\S+\.\S+$/, message: "Email non valida" },
-          })}
-        />
-        {errors.email && <span className="error">{errors.email.message}</span>}
-      </div>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "100vh",
+      }}
+    >
+      <form
+        style={{
+          backgroundColor: "#f0f0f0",
+          padding: "50px",
+          borderRadius: "5px",
+        }}
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+          <label>Email</label>
+          <input
+            {...register("email", {
+              required: "Email obbligatoria",
+              pattern: { value: /^\S+@\S+\.\S+$/, message: "Email non valida" },
+            })}
+          />
+          <div>
+            {errors.email && (
+              <span
+                style={{ color: "red", fontSize: "14px" }}
+                className="error"
+              >
+                {errors.email.message}
+              </span>
+            )}
+          </div>
+        </div>
 
-      <div>
-        <label>Password</label>
-        <input
-          type="password"
-          {...register("password", {
-            required: "Password obbligatoria",
-            minLength: { value: 6, message: "Almeno 6 caratteri" },
-          })}
-        />
-        {errors.password && (
-          <span className="error">{errors.password.message}</span>
-        )}
-      </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+          <label>Password</label>
+          <input
+            type="password"
+            {...register("password", {
+              required: "Password obbligatoria",
+              minLength: { value: 6, message: "Almeno 6 caratteri" },
+            })}
+          />
+          {errors.password && (
+            <span style={{ color: "red", fontSize: "14px" }} className="error">
+              {errors.password.message}
+            </span>
+          )}
+        </div>
 
-      <button type="submit" disabled={!isValid || isSubmitting}>
-        {isSubmitting ? "Accesso..." : "Login"}
-      </button>
-    </form>
+        <button type="submit" disabled={!isValid || isSubmitting}>
+          {isSubmitting ? "Accesso..." : "Login"}
+        </button>
+      </form>
+    </div>
   );
 }

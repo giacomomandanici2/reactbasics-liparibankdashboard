@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, type MouseEvent } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface Account {
+  id: string;
   name: string;
   iban: string;
   balance: number;
@@ -15,15 +17,20 @@ interface Account {
 
 export default function AccountCard(account: Account) {
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const navigate = useNavigate();
 
-  const handleRefresh = () => {
+  const handleRefresh = (event: MouseEvent) => {
+    event.stopPropagation();
     setIsRefreshing(true);
     setTimeout(() => {
       setIsRefreshing(false);
     }, 1000);
   };
   return (
-    <div>
+    <div
+      onClick={() => navigate(`/accounts/${account.id}`)}
+      style={{ cursor: "pointer" }}
+    >
       <h3>{account.name}</h3>
       <p>IBAN:{account.iban.slice(-6)}</p>
       <p>

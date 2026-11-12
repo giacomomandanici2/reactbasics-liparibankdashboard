@@ -77,6 +77,7 @@ export default function DashboardPage() {
             {accounts.map((account) => (
               <AccountCard
                 key={account.id}
+                id={account.id}
                 name={account.name}
                 iban={account.iban}
                 balance={account.balance}

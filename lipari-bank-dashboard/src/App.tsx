@@ -2,6 +2,7 @@ import "./App.css";
 import AppShell from "./core/layout/AppShell";
 import { ProtectedRoute } from "./core/routing/ProtectedRoute";
 import AccountDetailPage from "./features/dashboard/components/AccountDetailPage";
+import AccountsPage from "./features/dashboard/AccountsPage";
 import LoginPage from "./features/dashboard/components/LoginPage";
 import NotFoundPage from "./features/dashboard/components/NotFoundPage";
 import DashboardPage from "./features/dashboard/DashboardPage";
@@ -15,6 +16,7 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route element={<AppShell />}>
             <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/accounts" element={<AccountsPage />} />
             <Route
               path="/accounts/:accountId"
               element={<AccountDetailPage />}

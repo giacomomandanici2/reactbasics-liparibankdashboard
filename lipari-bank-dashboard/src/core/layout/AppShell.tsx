@@ -1,6 +1,6 @@
+import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
-import DashboardPage from "../../features/dashboard/DashboardPage";
 
 function AppShell() {
   return (
@@ -9,7 +9,7 @@ function AppShell() {
       <div className="app-body">
         <Sidebar />
         <main className="app-main">
-          <DashboardPage />
+          <Outlet />
         </main>
       </div>
     </div>
