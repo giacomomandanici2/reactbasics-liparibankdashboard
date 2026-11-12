@@ -32,8 +32,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const login = useCallback(async (email: string, password: string) => {
     setIsLoading(true);
     await new Promise((r) => setTimeout(r, 1000));
-    setUser({ id: "1", name: "Mario Rossi", email });
+    setUser({ id: "1", name: email, email: email });
     setIsLoading(false);
+    
   }, []);
 
   const logout = useCallback(() => setUser(null), []);

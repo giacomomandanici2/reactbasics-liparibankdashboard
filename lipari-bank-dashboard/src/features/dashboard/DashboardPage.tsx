@@ -5,7 +5,7 @@ import type { Movement } from "./components/MovementRow";
 import { useApi } from "../../hooks/useApi";
 import SkeletonLoader from "../../utils/SkeletonLoader";
 
-interface Account {
+export interface Account {
   id: string;
   name: string;
   type: "PRIVATE" | "BUSINESS";

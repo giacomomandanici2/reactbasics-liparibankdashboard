@@ -7,10 +7,12 @@ import { AuthProvider } from "./store/auth/AuthContext.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
+    {/* <BrowserRouter> */}
     <ThemeProvider>
       <AuthProvider>
         <App />
       </AuthProvider>
     </ThemeProvider>
+    {/* </BrowserRouter> */}
   </StrictMode>,
 );
