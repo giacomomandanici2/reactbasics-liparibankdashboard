@@ -25,7 +25,6 @@ export default function AccountDetailPage() {
 
   return (
     <div>
-      <button onClick={() => navigate(-1)}>← Indietro</button>
       <h1>{account.name}</h1>
       <p>IBAN: {account.iban}</p>
       <p>Saldo: € {account.balance}</p>
