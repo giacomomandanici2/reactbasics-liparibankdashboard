@@ -1,12 +1,8 @@
 //Crea src/features/dashboard/components/MovementRow.tsx:Props: movement: Movement Mostra: data formattata con Intl.DateTimeFormat('it-IT'), descrizione, importo con segno e colore (verde positivo, rosso negativo), badge categoria
-export interface Movement {
-  type: "CREDIT" | "DEBIT";
-  date: string;
-  description: string;
-  amount: number;
-  category: string;
-  id: string;
-}
+import DOMPurify from "dompurify";
+import type { Movement } from "../../../types/models";
+
+export type { Movement };
 
 export default function MovementRow(movement: Movement) {
   return (
@@ -23,6 +19,12 @@ export default function MovementRow(movement: Movement) {
         }).format(movement.amount)}
       </p>
       <span>{movement.category}</span>
+      {movement.notes && (
+        <div
+          className="movement-notes"
+          dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(movement.notes) }}
+        />
+      )}
     </div>
   );
 }

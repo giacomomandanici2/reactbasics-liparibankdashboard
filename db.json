@@ -33,6 +33,16 @@
             "amount": 1800.00,
             "type": "CREDIT",
             "category": "Reddito"
+        },
+        {
+            "id": "999",
+            "accountId": "1",
+            "date": "2026-05-01",
+            "description": "Test XSS",
+            "amount": -10,
+            "type": "DEBIT",
+            "category": "test",
+            "notes": "<script>alert('XSS!')</script><b>Nota importante</b>"
         }
     ]
 }

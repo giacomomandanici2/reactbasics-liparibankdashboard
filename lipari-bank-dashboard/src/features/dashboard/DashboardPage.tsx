@@ -1,4 +1,3 @@
-import { useState } from "react";
 import AccountCard from "./components/AccountCard";
 import TransactionList from "./components/TransactionList";
 import type { Movement } from "./components/MovementRow";
@@ -13,19 +12,8 @@ export interface Account {
   iban: string;
 }
 
-const mockMovements: Movement[] = [
-  {
-    type: "CREDIT",
-    date: "",
-    description: "",
-    amount: 10,
-    category: "",
-    id: "",
-  },
-];
-
 export default function DashboardPage() {
-  const [movements] = useState<Movement[]>(mockMovements);
+  const { data: movements } = useApi<Movement[]>("/api/movements");
 
   const {
     data: accounts,
@@ -86,7 +74,7 @@ export default function DashboardPage() {
             ))}
           </div>
 
-          <TransactionList movements={movements} />
+          <TransactionList movements={movements ?? []} />
         </>
       )}
     </section>

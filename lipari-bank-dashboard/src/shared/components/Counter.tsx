@@ -1,18 +1,26 @@
 import { useState } from "react";
 
-export default function Counter(props: { initialValue: number }) {
+export function Counter(props: { initialValue: number }) {
   const [count, setCount] = useState(props.initialValue);
+
   const handleIncrement = () => {
     setCount((prev) => prev + 1);
   };
+
   const handleDecrement = () => {
     setCount((prev) => prev - 1);
   };
+
+  const handleReset = () => {
+    setCount(props.initialValue);
+  };
+
   return (
     <div>
-      <h1>Counter: {count}</h1>
+      <span>{count}</span>
       <button onClick={handleIncrement}>+</button>
       <button onClick={handleDecrement}>-</button>
+      <button onClick={handleReset}>Reset</button>
     </div>
   );
 }

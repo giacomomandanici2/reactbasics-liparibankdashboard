@@ -12,3 +12,14 @@ export interface Account {
   balance: number;
   type: "PRIVATE" | "BUSINESS";
 }
+
+export interface Movement {
+  id: string;
+  accountId?: string;
+  date: string;
+  description: string;
+  amount: number;
+  type: "CREDIT" | "DEBIT";
+  category: string;
+  notes?: string;
+}

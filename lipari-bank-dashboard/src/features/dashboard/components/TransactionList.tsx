@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useCallback, useReducer } from "react";
 import FilterPanel from "./FilterPanel";
 import type { Movement } from "./MovementRow";
 import { initialState, reducer } from "../../../types";
@@ -13,6 +13,10 @@ function formatCurrency(amount: number) {
 
 export default function TransactionList(props: { movements: Movement[] }) {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  const handleClick = useCallback((id: string) => {
+    console.log("Movimento:", id);
+  }, []);
 
   const searchText = state.searchText.toLowerCase();
 
@@ -41,7 +45,11 @@ export default function TransactionList(props: { movements: Movement[] }) {
       ) : (
         <ul>
           {filteredMovements.map((movement) => (
-            <TransactionItem movement={movement} key={movement.id} />
+            <TransactionItem
+              movement={movement}
+              key={movement.id}
+              onClick={handleClick}
+            />
           ))}
         </ul>
       )}
