@@ -47,10 +47,10 @@ export function TransferForm() {
           placeholder="IBAN destinatario"
           {...register("iban", {
             required: true,
-            pattern: {
-              value: /^IT\d{25}$/,
-              message: "IBAN non valido (IT + 25 cifre)",
-            },
+            // pattern: {
+            //   value: /^IT\d{25}$/,
+            //   message: "IBAN non valido (IT + 25 cifre)",
+            // },
           })}
         />
         {errors.iban && <span>{errors.iban.message}</span>}

@@ -1,5 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { useAuth } from "../../../store/auth/AuthContext";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { loginAsync, selectAuthError } from "../../../store/slices/authSlice";
 import { useForm } from "react-hook-form";
 
 interface LoginFormValues {
@@ -8,7 +9,8 @@ interface LoginFormValues {
 }
 
 export default function LoginPage() {
-  const auth = useAuth();
+  const dispatch = useAppDispatch();
+  const authError = useAppSelector(selectAuthError);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -19,9 +21,15 @@ export default function LoginPage() {
   } = useForm<LoginFormValues>({ mode: "onChange" });
 
   const onSubmit = async (data: LoginFormValues) => {
-    await auth.login(data.email, data.password);
-    const from = (location.state as any)?.from?.pathname || "/dashboard";
-    navigate(from, { replace: true });
+    try {
+      await dispatch(
+        loginAsync({ email: data.email, password: data.password }),
+      ).unwrap();
+      const from = (location.state as any)?.from?.pathname || "/dashboard";
+      navigate(from, { replace: true });
+    } catch {
+      return;
+    }
   };
 
   return (
@@ -49,6 +57,7 @@ export default function LoginPage() {
               required: "Email obbligatoria",
               pattern: { value: /^\S+@\S+\.\S+$/, message: "Email non valida" },
             })}
+            placeholder="mario@test.it"
           />
           <div>
             {errors.email && (
@@ -77,6 +86,10 @@ export default function LoginPage() {
             </span>
           )}
         </div>
+
+        {authError && (
+          <div style={{ color: "red", fontSize: "14px" }}>{authError}</div>
+        )}
 
         <button type="submit" disabled={!isValid || isSubmitting}>
           {isSubmitting ? "Accesso..." : "Login"}

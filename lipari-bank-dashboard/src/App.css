@@ -93,7 +93,7 @@ aside {
 }
 
 
-/* .notification-container {
+.notification-container {
     position: relative;
 }
 
@@ -158,4 +158,4 @@ aside {
     display: flex;
     align-items: center;
     justify-content: space-between;
-} */
+}

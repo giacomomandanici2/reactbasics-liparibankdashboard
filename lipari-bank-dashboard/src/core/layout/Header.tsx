@@ -1,4 +1,8 @@
-import { useAuth } from "../../store/auth/AuthContext";
+import { useAppSelector } from "../../store/hooks";
+import {
+  selectIsAuthenticated,
+  selectUser,
+} from "../../store/slices/authSlice";
 import { useTheme } from "../../store/theme/ThemeContext";
 import NotificationBell from "./NotificationBell";
 
@@ -6,10 +10,11 @@ import NotificationBell from "./NotificationBell";
 //prendi userid da db
 
 function Header() {
-  const auth = useAuth();
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
+  const user = useAppSelector(selectUser);
   const theme = useTheme();
   return (
-    <header
+    <div
       style={{
         backgroundColor: theme.theme === "light" ? "#f0f0f0" : "#333",
         color: theme.theme === "light" ? "#000" : "#fff",
@@ -20,15 +25,30 @@ function Header() {
       }}
     >
       <h1>🏦 LipariBank Dashboard</h1>
-      {auth.isAuthenticated && (
-        <h2>Ciao, {auth.user?.name ? auth.user?.name : ""}</h2>
+      {isAuthenticated && (
+        <h2>Ciao, {user ? `${user.firstName} ${user.lastName}` : ""}</h2>
       )}
-      <div>
-        <button onClick={theme.toggleTheme}>🌙 Dark / ☀️ Light</button>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          gap: "4px",
+        }}
+      >
+        <button
+          style={{
+            fontSize: "1.4rem",
+            border: "none",
+            background: "transparent",
+            cursor: "pointer",
+          }}
+          onClick={theme.toggleTheme}
+        >
+          🌙 / ☀️
+        </button>
+        <NotificationBell userId={user?.id ?? ""}></NotificationBell>
       </div>
-      {/* <div className="user-placeholder">👤</div> */}
-      <NotificationBell userId="{userId}"></NotificationBell>
-    </header>
+    </div>
   );
 }
 export default Header;

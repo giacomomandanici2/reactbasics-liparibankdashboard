@@ -1,8 +1,13 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-import { useAuth } from "../../store/auth/AuthContext";
+import { useAppSelector } from "../../store/hooks";
+import {
+  selectAuthLoading,
+  selectIsAuthenticated,
+} from "../../store/slices/authSlice";
 
 export function ProtectedRoute() {
-  const { isAuthenticated, isLoading } = useAuth();
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
+  const isLoading = useAppSelector(selectAuthLoading);
   const location = useLocation();
 
   if (isLoading) return <div>Caricamento...</div>;

@@ -40,10 +40,21 @@ export default function AccountCard(account: Account) {
           currency: "EUR",
         }).format(account.balance)}
       </p>
-      <span>{account.badge}</span>
-      <button onClick={handleRefresh} disabled={isRefreshing}>
-        🔄 Aggiorna
-      </button>
+      <div style={{ display: "flex", flexDirection: "row", gap: "4px" }}>
+        <span
+          style={{
+            backgroundColor:
+              account.badge === "PRIVATE" ? "AccentColor" : "green",
+            borderRadius: 10,
+            padding: "4px 8px",
+          }}
+        >
+          {account.badge}
+        </span>
+        <button onClick={handleRefresh} disabled={isRefreshing}>
+          🔄 Aggiorna
+        </button>
+      </div>
     </div>
   );
 }
